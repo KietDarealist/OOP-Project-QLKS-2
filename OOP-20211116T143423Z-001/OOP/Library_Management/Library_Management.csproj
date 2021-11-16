@@ -52,10 +52,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QUOCGIA.cs" />
+    <Compile Include="SUDUNG_DV.cs" />
     <Compile Include="THANHTOANPHONG.cs" />
     <Compile Include="THIETBIDICHVU.cs" />
     <Compile Include="THUEPHONG.cs" />
     <Compile Include="TIENTE.cs" />
+    <Compile Include="TRANGBI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

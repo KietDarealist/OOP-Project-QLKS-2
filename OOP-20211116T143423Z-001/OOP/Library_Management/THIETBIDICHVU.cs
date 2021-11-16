@@ -12,6 +12,8 @@ namespace Library_Management
         public string tenThietBi { get; set; }
         public int giaTien { get; set; }
 
+
+
         public THIETBIDICHVU (THIETBIDICHVU dv)
         {
             this.idThietBi = dv.idThietBi;

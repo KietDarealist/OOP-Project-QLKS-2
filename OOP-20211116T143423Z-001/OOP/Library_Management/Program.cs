@@ -22,11 +22,14 @@ namespace Library_Management
         public static List<QUOCGIA> dsQG = new List<QUOCGIA>();
         public static List<BOOKING> dsBooking = new List<BOOKING>();
         public static List<NHANVIEN> dsNhanVien = new List<NHANVIEN>();
-        public static List<THUEPHONG> dsHopDong = new List<THUEPHONG>();
-        public static List<THANHTOANPHONG> dsHoaDon = new List<THANHTOANPHONG>();
+        public static List<THUEPHONG> dsThuePhong = new List<THUEPHONG>();
+        public static List<THANHTOANPHONG> dsThanhToan = new List<THANHTOANPHONG>();
         public static List<LOAIPHONG> dsLoaiPhong = new List<LOAIPHONG>();
         public static List<DANHMUCPHONG> dsPhong = new List<DANHMUCPHONG>();
         public static List<CT_BOOKING> dsChiTietBooking = new List<CT_BOOKING>();
+        public static List<THIETBIDICHVU> dsThietBi = new List<THIETBIDICHVU>();
+        public static List<TRANGBI> dsTrangBi = new List<TRANGBI>();
+        public static List<SUDUNG_DV> dsSuDung = new List<SUDUNG_DV>();
 
         public static void TaoDSChiTietBooking()
         {
@@ -51,24 +54,17 @@ namespace Library_Management
         {
             dsPhong.Add(new DANHMUCPHONG("A100","Giuong bi sap","Phong cach lang man",dsLoaiPhong[0]));
             dsPhong.Add(new DANHMUCPHONG("A101", "Bi nghet bon cau", "Phong cach ma quai", dsLoaiPhong[0]));
-
-
             dsPhong.Add(new DANHMUCPHONG("A102", "Hoan Hao", "Phong cach hoang gia", dsLoaiPhong[1]));
-
             dsPhong.Add(new DANHMUCPHONG("A103", "Hu bong den", "Phong cach Tay au", dsLoaiPhong[2]));
             dsPhong.Add(new DANHMUCPHONG("A104", "Hu may lanh", "Phong cach Nga", dsLoaiPhong[2]));
-
             dsPhong.Add(new DANHMUCPHONG("A105", "Hu ti vi", "Phong cach binh dan", dsLoaiPhong[3]));
             dsPhong.Add(new DANHMUCPHONG("A106", "Giuong bi sap", "Phong cach binh dan", dsLoaiPhong[3]));
 
             dsLoaiPhong[0].dsCacPhong.Add(dsPhong[0]);
             dsLoaiPhong[0].dsCacPhong.Add(dsPhong[1]);
-
             dsLoaiPhong[1].dsCacPhong.Add(dsPhong[2]);
-
             dsLoaiPhong[2].dsCacPhong.Add(dsPhong[3]);
             dsLoaiPhong[2].dsCacPhong.Add(dsPhong[4]);
-
             dsLoaiPhong[3].dsCacPhong.Add(dsPhong[5]);
             dsLoaiPhong[3].dsCacPhong.Add(dsPhong[6]);
 
@@ -104,35 +100,41 @@ namespace Library_Management
 
         }
 
-        public static  void TaoDSHopDong()
+        public static  void TaodsThuePhong()
         {
-            dsHopDong.Add(new THUEPHONG("HD01", "NV01", "A100", "11/15/2021", "11/22/2021",dsKH[0]));
-            dsHopDong.Add(new THUEPHONG("HD02", "NV01", "A101", "11/15/2021", "11/17/2021", dsKH[1]));
-            dsHopDong.Add(new THUEPHONG("HD03", "NV02", "A102", "11/14/2021", "11/16/2021", dsKH[2]));
-            dsHopDong.Add(new THUEPHONG("HD04", "NV02", "A103", "11/13/2021", "11/15/2021", dsKH[3]));
-            dsHopDong.Add(new THUEPHONG("HD05", "NV03", "A104", "11/12/2021", "11/14/2021", dsKH[4]));
+            dsThuePhong.Add(new THUEPHONG("HD01", null, dsNhanVien[0], "A100", "11/15/2021", "11/22/2021", dsKH[0]));
+            dsThuePhong.Add(new THUEPHONG("HD02", null, dsNhanVien[0], "A101", "11/15/2021", "11/17/2021", dsKH[1]));
+            dsThuePhong.Add(new THUEPHONG("HD03", null, dsNhanVien[1], "A102", "11/14/2021", "11/16/2021", dsKH[2]));
+            dsThuePhong.Add(new THUEPHONG("HD04", null, dsNhanVien[1], "A103", "11/13/2021", "11/15/2021", dsKH[3]));
+            dsThuePhong.Add(new THUEPHONG("HD05", null, dsNhanVien[2], "A104", "11/12/2021", "11/14/2021", dsKH[4]));
 
-            dsNhanVien[0].dsHopDong.Add(dsHopDong[0]);
-            dsNhanVien[0].dsHopDong.Add(dsHopDong[1]);
-            dsNhanVien[1].dsHopDong.Add(dsHopDong[2]);
-            dsNhanVien[1].dsHopDong.Add(dsHopDong[3]);
-            dsNhanVien[2].dsHopDong.Add(dsHopDong[4]);
+            dsNhanVien[0].dsThuePhong.Add(dsThuePhong[0]);
+            dsNhanVien[0].dsThuePhong.Add(dsThuePhong[1]);
+            dsNhanVien[1].dsThuePhong.Add(dsThuePhong[2]);
+            dsNhanVien[1].dsThuePhong.Add(dsThuePhong[3]);
+            dsNhanVien[2].dsThuePhong.Add(dsThuePhong[4]);
 
         }
 
-        public static void TaoDSHoaDon()
+        public static void TaodsThanhToan()
         {
-            dsHoaDon.Add(new THANHTOANPHONG("TT01", "HD01", "11/15/2021", 800, 40));
-            dsHoaDon.Add(new THANHTOANPHONG("TT02", "HD02", "11/15/2021", 200, 50));
-            dsHoaDon.Add(new THANHTOANPHONG("TT03", "HD03", "11/14/2021", 210, 50));
-            dsHoaDon.Add(new THANHTOANPHONG("TT04", "HD04", "11/14/2021", 220, 60));
-            dsHoaDon.Add(new THANHTOANPHONG("TT05", "HD05", "11/11/2021", 230, 60));
+            dsThanhToan.Add(new THANHTOANPHONG("TT01", dsThuePhong[0], dsNhanVien[0], "11/15/2021", 800, 40));
+            dsThanhToan.Add(new THANHTOANPHONG("TT02", dsThuePhong[1], dsNhanVien[0], "11/15/2021", 200, 50));
+            dsThanhToan.Add(new THANHTOANPHONG("TT03", dsThuePhong[2], dsNhanVien[1], "11/14/2021", 210, 50));
+            dsThanhToan.Add(new THANHTOANPHONG("TT04", dsThuePhong[3], dsNhanVien[1], "11/14/2021", 220, 60));
+            dsThanhToan.Add(new THANHTOANPHONG("TT05", dsThuePhong[4], dsNhanVien[2], "11/11/2021", 230, 60));
 
-            dsNhanVien[0].dsHoaDon.Add(dsHoaDon[0]);
-            dsNhanVien[0].dsHoaDon.Add(dsHoaDon[1]);
-            dsNhanVien[1].dsHoaDon.Add(dsHoaDon[2]);
-            dsNhanVien[1].dsHoaDon.Add(dsHoaDon[3]);
-            dsNhanVien[2].dsHoaDon.Add(dsHoaDon[4]);
+            dsNhanVien[0].dsThanhToan.Add(dsThanhToan[0]);
+            dsNhanVien[0].dsThanhToan.Add(dsThanhToan[1]);
+            dsNhanVien[1].dsThanhToan.Add(dsThanhToan[2]);
+            dsNhanVien[1].dsThanhToan.Add(dsThanhToan[3]);
+            dsNhanVien[2].dsThanhToan.Add(dsThanhToan[4]);
+
+            dsThuePhong[0].thanhtoan = dsThanhToan[0];
+            dsThuePhong[0].thanhtoan = dsThanhToan[1];
+            dsThuePhong[0].thanhtoan = dsThanhToan[2];
+            dsThuePhong[0].thanhtoan = dsThanhToan[3];
+            dsThuePhong[0].thanhtoan = dsThanhToan[4];
         }
 
 
@@ -198,6 +200,72 @@ namespace Library_Management
 
         }
 
+        public static void TaoDSThietBi()
+        {
+            dsThietBi.Add(new THIETBIDICHVU("TB01", "Tu Lanh", 500));
+            dsThietBi.Add(new THIETBIDICHVU("TB02", "May Say", 100));
+            dsThietBi.Add(new THIETBIDICHVU("TB03", "Ti Vi", 300));
+            dsThietBi.Add(new THIETBIDICHVU("TB04", "Bon Tam", 700));
+            dsThietBi.Add(new THIETBIDICHVU("TB05", "Lo nuong", 400));
+        }
+
+        public static void TaoDSTrangBi()
+        {
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[0], dsThietBi[0], 2));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[0], dsThietBi[1], 1));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[0], dsThietBi[2], 3));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[0], dsThietBi[3], 1));
+
+
+
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[1], dsThietBi[0], 2));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[1], dsThietBi[1], 2));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[1], dsThietBi[2], 3));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[1], dsThietBi[3], 2));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[1], dsThietBi[4], 2));
+
+
+
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[2], dsThietBi[0], 1));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[2], dsThietBi[1], 1));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[2], dsThietBi[2], 1));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[2], dsThietBi[3], 1));
+
+
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[3], dsThietBi[0], 1));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[3], dsThietBi[1], 1));
+            dsTrangBi.Add(new TRANGBI(dsLoaiPhong[3], dsThietBi[2], 1));
+        }
+
+        public static void TaoDSSuDung()
+        {
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[0], dsThietBi[0], "11/22/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[0], dsThietBi[1], "11/22/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[0], dsThietBi[2], "11/22/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[0], dsThietBi[3], "11/22/2021", 1));
+
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[1], dsThietBi[0], "11/17/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[1], dsThietBi[1], "11/17/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[1], dsThietBi[2], "11/17/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[1], dsThietBi[3], "11/17/2021", 1));
+
+
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[2], dsThietBi[0], "11/16/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[2], dsThietBi[1], "11/16/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[2], dsThietBi[2], "11/16/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[2], dsThietBi[3], "11/16/2021", 1));
+
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[3], dsThietBi[0], "11/15/2021", 1));
+  
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[4], dsThietBi[0], "11/15/2021", 1));
+            dsSuDung.Add(new SUDUNG_DV(dsThuePhong[4], dsThietBi[1], "11/15/2021", 1));
+            
+        }
+
+   
+
+        
+
         public static void Linq01()
         {
             // lambda
@@ -231,11 +299,11 @@ namespace Library_Management
             }
         }
 
-        //Kiet: Chon ra danh sach ca hop dong o khong qua 2 ngay
+        //Kiet: Chon ra danh sach cac hop dong o khong qua 2 ngay
         public static void Linq03()
         {
             var hopDongs =
-                from h in dsHopDong
+                from h in dsThuePhong
                 where Convert.ToDateTime(h.ngayDangKyTra).Day - Convert.ToDateTime(h.ngayThue).Day <= 2
                 select h;
 
@@ -243,8 +311,8 @@ namespace Library_Management
             
             foreach(var h in hopDongs)
             {
-                Console.WriteLine("-> Hop Dong: {0} - Nhan Vien: {1} \nKhachHang: {5} - Ma Phong: {2} - Ngay thue {3} - Ngay Tra {4}",
-                    h.idHopDongTP, h.idNhanVien, h.maPhong, h.ngayThue, h.ngayDangKyTra, h.khachHang.hoTen);            }
+                Console.WriteLine("- Hop Dong: {0} - Nhan Vien: {1} \nKhachHang: {5} - Ma Phong: {2} - Ngay thue {3} - Ngay Tra {4}",
+                    h.idHopDongTP, h.nv.idNV, h.maPhong, h.ngayThue, h.ngayDangKyTra, h.khachHang.hoTen);            }
 
         }
 
@@ -252,10 +320,10 @@ namespace Library_Management
         public static void Linq04()
         {
             var tipsHopDong =
-              from hoadon in dsHoaDon
-              from hopdong in dsHopDong
-              where hoadon.idHopDongTP == hopdong.idHopDongTP
-              select new { idNhanVien = hopdong.idNhanVien, idHopDongTP = hopdong.idHopDongTP, tienDichVu = hoadon.tienDichVu };
+              from hoadon in dsThanhToan
+              from hopdong in dsThuePhong
+              where hoadon.hopdong.idHopDongTP == hopdong.idHopDongTP
+              select new { idNhanVien = hopdong.nv.idNV, idHopDongTP = hopdong.idHopDongTP, tienDichVu = hoadon.tienDichVu };
             var tipsNhanVien =
                  from nhanvien in dsNhanVien
                  from hopdong in tipsHopDong
@@ -273,9 +341,9 @@ namespace Library_Management
                 Console.WriteLine("Nhan Vien {0} - Tong tips: {1}", g.NhanVien, g.TongTips);
                 }
 
-
-
         }
+
+       
 
         static void Main(string[] args)
         {
@@ -287,18 +355,25 @@ namespace Library_Management
             TaoDSNhanVien();
             TaoDSKhachHang();
             TaoDSBooking();
-            TaoDSHopDong();
-            TaoDSHoaDon();
+            TaodsThuePhong();
+            TaodsThanhToan();
+            TaoDSThietBi();
+            TaoDSTrangBi();
+            TaoDSSuDung();
+         
+           
+           
+            
             TaoDSChiTietBooking();
 
 
-            Linq01();
+           
 
 
 
-          //  Linq02();   // Kiet
-          //  Linq03();    // Kiet 
-          //  Linq04();    // Kiet
+            Linq02();   // Kiet
+            Linq03();    // Kiet 
+            Linq04();    // Kiet
 
 
             Console.ReadKey();

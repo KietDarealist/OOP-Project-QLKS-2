@@ -9,7 +9,8 @@ namespace Library_Management
     class THANHTOANPHONG
     {
         public string idThanhToan { get; set; }
-        public string idHopDongTP { get; set; }
+        public THUEPHONG hopdong { get; set; }
+        public NHANVIEN nv { get; set; }
         public string ngayThanhToan { get; set; }
         public int tienPhong { get; set; }
         public int tienDichVu { get; set; }
@@ -17,17 +18,19 @@ namespace Library_Management
         public THANHTOANPHONG (THANHTOANPHONG ttp)
         {
             this.idThanhToan = ttp.idThanhToan;
-            this.idHopDongTP = ttp.idHopDongTP;
+            this.hopdong = ttp.hopdong;
+            this.nv = ttp.nv;
             this.ngayThanhToan = ttp.ngayThanhToan;
             this.tienPhong = ttp.tienPhong;
             this.tienDichVu = ttp.tienDichVu;
 
         }
 
-        public THANHTOANPHONG(string idThanhToan, string idHopDongTP, string ngayThanhToan, int tienPhong, int tienDichVu)
+        public THANHTOANPHONG(string idThanhToan, THUEPHONG hopdong, NHANVIEN nv, string ngayThanhToan, int tienPhong, int tienDichVu)
         {
             this.idThanhToan = idThanhToan;
-            this.idHopDongTP = idHopDongTP;
+            this.hopdong = hopdong;
+            this.nv = nv;
             this.ngayThanhToan = ngayThanhToan;
             this.tienPhong =tienPhong;
             this.tienDichVu = tienDichVu;

@@ -19,3 +19,10 @@ D:\BAITAPLAPTRINH\Lap Trinh Huong Doi Tuong\Project\two\OOP\Library_Management\o
 D:\BAITAPLAPTRINH\Lap Trinh Huong Doi Tuong\Project\two\OOP\Library_Management\obj\Debug\Library_Management.csproj.CoreCompileInputs.cache
 D:\BAITAPLAPTRINH\Lap Trinh Huong Doi Tuong\Project\two\OOP\Library_Management\obj\Debug\Library_Management.exe
 D:\BAITAPLAPTRINH\Lap Trinh Huong Doi Tuong\Project\two\OOP\Library_Management\obj\Debug\Library_Management.pdb
+F:\OOP-Project-QLKS2\OOP-20211116T143423Z-001\OOP\Library_Management\bin\Debug\Library_Management.exe.config
+F:\OOP-Project-QLKS2\OOP-20211116T143423Z-001\OOP\Library_Management\bin\Debug\Library_Management.exe
+F:\OOP-Project-QLKS2\OOP-20211116T143423Z-001\OOP\Library_Management\bin\Debug\Library_Management.pdb
+F:\OOP-Project-QLKS2\OOP-20211116T143423Z-001\OOP\Library_Management\obj\Debug\Library_Management.csproj.AssemblyReference.cache
+F:\OOP-Project-QLKS2\OOP-20211116T143423Z-001\OOP\Library_Management\obj\Debug\Library_Management.csproj.CoreCompileInputs.cache
+F:\OOP-Project-QLKS2\OOP-20211116T143423Z-001\OOP\Library_Management\obj\Debug\Library_Management.exe
+F:\OOP-Project-QLKS2\OOP-20211116T143423Z-001\OOP\Library_Management\obj\Debug\Library_Management.pdb

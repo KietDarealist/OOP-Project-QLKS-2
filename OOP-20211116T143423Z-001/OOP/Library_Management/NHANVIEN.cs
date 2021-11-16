@@ -24,9 +24,9 @@ namespace Library_Management
         //1 Nhan Vien co the co nhieu booking
         public ICollection<BOOKING> dsBooking;
         //1 Nhan vien co the lam nhieu hop dong
-        public ICollection<THUEPHONG> dsHopDong;
+        public ICollection<THUEPHONG> dsThuePhong;
         //1 Nhan vien co the lap nhieu hoa don
-        public ICollection<THANHTOANPHONG> dsHoaDon;
+        public ICollection<THANHTOANPHONG> dsThanhToan;
 
         public NHANVIEN(NHANVIEN nv)
         {
@@ -40,16 +40,16 @@ namespace Library_Management
             this.luong = nv.luong;
             this.matKhau = nv.matKhau;
             this.dsBooking = nv.dsBooking;
-            this.dsHopDong = nv.dsHopDong;
-            this.dsHoaDon = nv.dsHoaDon;
+            this.dsThuePhong = nv.dsThuePhong;
+            this.dsThanhToan = nv.dsThanhToan;
         }
 
 
         public NHANVIEN(string idNV, string hoTen,
         string ngaySinh, string gioiTinh, string diaChi,
         string sdt, string chucVu, int luong, string matKhau,
-        ICollection<BOOKING> dsBooking, ICollection<THUEPHONG> dsHopDong,
-        ICollection<THANHTOANPHONG> dsHoaDon)
+        ICollection<BOOKING> dsBooking, ICollection<THUEPHONG> dsThuePhong,
+        ICollection<THANHTOANPHONG> dsThanhToan)
         {
             this.idNV = idNV;
             this.hoTen = hoTen;
@@ -61,8 +61,8 @@ namespace Library_Management
             this.luong = luong;
             this.matKhau = matKhau;
             this.dsBooking = dsBooking;
-            this.dsHopDong = dsHopDong;
-            this.dsHoaDon =dsHoaDon;
+            this.dsThuePhong = dsThuePhong;
+            this.dsThanhToan =dsThanhToan;
         }
       
     }
