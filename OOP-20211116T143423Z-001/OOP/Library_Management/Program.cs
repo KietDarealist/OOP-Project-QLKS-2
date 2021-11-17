@@ -33,11 +33,24 @@ namespace Library_Management
 
         public static void TaoDSChiTietBooking()
         {
-            dsChiTietBooking.Add(new CT_BOOKING(dsBooking[0],dsLoaiPhong[0], 2));
-            dsChiTietBooking.Add(new CT_BOOKING(dsBooking[1], dsLoaiPhong[1], 1));
-            dsChiTietBooking.Add(new CT_BOOKING(dsBooking[2], dsLoaiPhong[2], 2));
-            dsChiTietBooking.Add(new CT_BOOKING(dsBooking[3], dsLoaiPhong[3], 3));
-            dsChiTietBooking.Add(new CT_BOOKING(dsBooking[4], dsLoaiPhong[2], 1));
+            dsChiTietBooking.Add(new CT_BOOKING(dsLoaiPhong[0], new List<BOOKING>()));
+            dsChiTietBooking.Add(new CT_BOOKING(dsLoaiPhong[1], new List<BOOKING>()));
+            dsChiTietBooking.Add(new CT_BOOKING(dsLoaiPhong[2], new List<BOOKING>()));
+            dsChiTietBooking.Add(new CT_BOOKING(dsLoaiPhong[3], new List<BOOKING>()));
+      
+            dsChiTietBooking[0].booking.Add(dsBooking[0]);
+            dsChiTietBooking[0].booking.Add(dsBooking[1]);
+            dsChiTietBooking[0].booking.Add(dsBooking[2]);
+
+            dsChiTietBooking[1].booking.Add(dsBooking[3]);
+            dsChiTietBooking[3].booking.Add(dsBooking[4]);
+
+
+
+
+
+
+
 
         }
 
@@ -102,11 +115,11 @@ namespace Library_Management
 
         public static  void TaodsThuePhong()
         {
-            dsThuePhong.Add(new THUEPHONG("HD01", null, dsNhanVien[0], "A100", "11/15/2021", "11/22/2021", dsKH[0]));
-            dsThuePhong.Add(new THUEPHONG("HD02", null, dsNhanVien[0], "A101", "11/15/2021", "11/17/2021", dsKH[1]));
-            dsThuePhong.Add(new THUEPHONG("HD03", null, dsNhanVien[1], "A102", "11/14/2021", "11/16/2021", dsKH[2]));
-            dsThuePhong.Add(new THUEPHONG("HD04", null, dsNhanVien[1], "A103", "11/13/2021", "11/15/2021", dsKH[3]));
-            dsThuePhong.Add(new THUEPHONG("HD05", null, dsNhanVien[2], "A104", "11/12/2021", "11/14/2021", dsKH[4]));
+            dsThuePhong.Add(new THUEPHONG("HD01", null, dsNhanVien[0], dsPhong[0], "11/15/2021", "11/22/2021", dsKH[0]));
+            dsThuePhong.Add(new THUEPHONG("HD02", null, dsNhanVien[0], dsPhong[1], "11/15/2021", "11/17/2021", dsKH[1]));
+            dsThuePhong.Add(new THUEPHONG("HD03", null, dsNhanVien[1], dsPhong[2], "11/14/2021", "11/16/2021", dsKH[2]));
+            dsThuePhong.Add(new THUEPHONG("HD04", null, dsNhanVien[1], dsPhong[3], "11/13/2021", "11/15/2021", dsKH[3]));
+            dsThuePhong.Add(new THUEPHONG("HD05", null, dsNhanVien[2], dsPhong[4], "11/12/2021", "11/14/2021", dsKH[4]));
 
             dsNhanVien[0].dsThuePhong.Add(dsThuePhong[0]);
             dsNhanVien[0].dsThuePhong.Add(dsThuePhong[1]);
@@ -131,10 +144,10 @@ namespace Library_Management
             dsNhanVien[2].dsThanhToan.Add(dsThanhToan[4]);
 
             dsThuePhong[0].thanhtoan = dsThanhToan[0];
-            dsThuePhong[0].thanhtoan = dsThanhToan[1];
-            dsThuePhong[0].thanhtoan = dsThanhToan[2];
-            dsThuePhong[0].thanhtoan = dsThanhToan[3];
-            dsThuePhong[0].thanhtoan = dsThanhToan[4];
+            dsThuePhong[1].thanhtoan = dsThanhToan[1];
+            dsThuePhong[2].thanhtoan = dsThanhToan[2];
+            
+            dsThuePhong[4].thanhtoan = dsThanhToan[4];
         }
 
 
@@ -312,7 +325,7 @@ namespace Library_Management
             foreach(var h in hopDongs)
             {
                 Console.WriteLine("- Hop Dong: {0} - Nhan Vien: {1} \nKhachHang: {5} - Ma Phong: {2} - Ngay thue {3} - Ngay Tra {4}",
-                    h.idHopDongTP, h.nv.idNV, h.maPhong, h.ngayThue, h.ngayDangKyTra, h.khachHang.hoTen);            }
+                    h.idHopDongTP, h.nv.idNV, h.phong.idPhong, h.ngayThue, h.ngayDangKyTra, h.khachHang.hoTen);            }
 
         }
 
@@ -343,6 +356,124 @@ namespace Library_Management
 
         }
 
+        //Chon ra quoc gia booking nhieu nhat
+        public static void Linq05()
+        {
+            var bookingsGroup =
+                from bk in dsBooking
+                from quoctich in bk.kh.dsQuocTich
+                group bk by quoctich.tenNuoc into newbk
+                select new { nuoc = newbk.Key, bookings = newbk };
+
+            foreach (var b in bookingsGroup)
+            {
+                Console.WriteLine("Quoc gia: {0}", b.nuoc);
+                foreach (var bk in b.bookings)
+                {
+                    Console.WriteLine("- Booking ID: {0}, Ten Khach Hang: {1}, Ngay Booking: {2}", bk.idBooking, bk.kh.hoTen, bk.ngayDangKy);
+                }
+                Console.Write("\n");
+            }
+                
+        }
+
+        //Sap xep danh sach  booking theo thu tu tu dang ky som nhat den tre nhat
+        public static void Linq06()
+        {
+            var sortedBookingsByRegisterDay =
+                from b in dsBooking
+                orderby Convert.ToDateTime(b.ngayDangKy)
+                select b;
+
+            var sortedBookingsByReceivedDay =
+                from b in dsBooking
+                orderby Convert.ToDateTime(b.ngayNhan)
+                select b;
+
+
+            Console.WriteLine("Sap xep danh sach Booking theo ngay dang ky: ");
+            foreach (var s in sortedBookingsByRegisterDay)
+            {
+                Console.WriteLine("Booking ID: {0} - Ten Khach Hang: {1} - Ngay dang ky: {2}", s.idBooking, s.kh.hoTen, s.ngayDangKy);
+            }
+
+            Console.WriteLine("\nSap xep danh sach Booking theo ngay nhan phong: ");
+            foreach (var s in sortedBookingsByReceivedDay)
+            {
+                Console.WriteLine("Booking ID: {0} - Ten Khach Hang: {1} - Ngay nhan: {2}", s.idBooking, s.kh.hoTen, s.ngayNhan);
+            }
+
+        }
+
+        //Sap xep cac loai phong theo thu tu duoc dat it den duoc dat nhieu nhat
+        public static void Linq07()
+        {
+            var groupedDsCacPhong =
+                from d in dsChiTietBooking
+                group d by d.loaiPhong into newCTBooking
+                select new { LoaiPhong = newCTBooking.Key, ChiTiet = newCTBooking };
+
+
+            var sortedDSCacPhong =
+                from g in groupedDsCacPhong
+                from soluong in g.ChiTiet
+                orderby soluong.booking.Count
+                select g;
+
+            foreach(var s in sortedDSCacPhong)
+            {
+                Console.WriteLine("Loai Phong: {0}", s.LoaiPhong.tenLoaiPhong);
+                foreach (var c in s.ChiTiet)
+                {
+                    Console.WriteLine("So Luong Dat: {0} ", c.booking.Count);
+                }
+            }
+               
+        }
+
+        //In ra danh sach nhung hop dong da thanh toan tien truoc ngay tra phong
+        public static void Linq08()
+        {
+            var payedBeforeLeaveContracts =
+                from d in dsThanhToan
+                where Convert.ToDateTime(d.ngayThanhToan) <= Convert.ToDateTime(d.hopdong.ngayDangKyTra)
+                select d;
+
+            var notPayedBeforeLeaveContracts =
+                from d in dsThuePhong
+                where d.thanhtoan == null
+                select d;
+
+            Console.WriteLine("Danh sach nhung phong da thanh toan truoc ngay tra: ");
+            foreach (var p in payedBeforeLeaveContracts)
+                Console.WriteLine("ID Hop Dong: {0} - Ma Phong: {1}  - Ngay tra phong: {2} - Ngay thanh toan: {3}", p.hopdong.idHopDongTP, p.hopdong.phong.idPhong, p.hopdong.ngayDangKyTra, p.ngayThanhToan);
+
+
+            Console.WriteLine("\nDanh sach nhung phong chua thanh toan: ");
+            foreach (var n in notPayedBeforeLeaveContracts)
+                Console.WriteLine("ID Hop Dong: {0} - Ma Phong: {1} - Loai Phong: {2}  - Ngay Tra Phong: {3} - Ngay thanh toan: {4}", n.idHopDongTP, n.phong.idPhong, n.phong.loaiPhong.tenLoaiPhong, n.ngayDangKyTra, "Unknown");
+          
+        }
+
+        public static void Linq09()
+        {
+            var customersInfo =
+                from d in dsKH
+                select new { Ten = d.hoTen, GioiTinh = d.gioiTinh };
+
+            var employeesInfo =
+                from e in dsNhanVien
+                
+                select new { Ten = e.hoTen, GioiTinh = e.gioiTinh };
+
+            var allCustomersAndEmpoyeesInfo = customersInfo.Concat(employeesInfo);
+
+            Console.WriteLine("Danh sach nhan vien va khach hang o khach san: ");
+            foreach(var a in allCustomersAndEmpoyeesInfo)
+            {
+                Console.WriteLine("Ho va ten: {0} \t Gioi tinh: {1}", a.Ten, a.GioiTinh);
+            }
+        }
        
 
         static void Main(string[] args)
@@ -360,20 +491,22 @@ namespace Library_Management
             TaoDSThietBi();
             TaoDSTrangBi();
             TaoDSSuDung();
-         
-           
-           
-            
             TaoDSChiTietBooking();
 
 
-           
 
 
 
-            Linq02();   // Kiet
-            Linq03();    // Kiet 
-            Linq04();    // Kiet
+
+            //Linq02();    //Kiet
+            //Linq03();    //Kiet 
+            //Linq04();    //Kiet
+            //Linq05();    //Kiet
+            //Linq06();    //Kiet
+            //Linq07();    //Kiet
+            //Linq08();    //Kiet
+            //Linq09();    //Kiet
+
 
 
             Console.ReadKey();

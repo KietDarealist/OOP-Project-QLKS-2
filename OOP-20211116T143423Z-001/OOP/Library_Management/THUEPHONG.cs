@@ -11,7 +11,7 @@ namespace Library_Management
         public string idHopDongTP { get; set; }
         public THANHTOANPHONG thanhtoan { get; set; }
         public NHANVIEN nv { get; set; }
-        public string maPhong { get; set; }
+        public DANHMUCPHONG phong { get; set; }
         public string ngayThue { get; set; }
         public string ngayDangKyTra { get; set; }
 
@@ -23,19 +23,19 @@ namespace Library_Management
             this.idHopDongTP = hopdong.idHopDongTP;
             this.thanhtoan = hopdong.thanhtoan;
             this.nv = hopdong.nv;
-            this.maPhong = hopdong.maPhong;
+            this.phong = hopdong.phong;
             this.ngayThue = hopdong.ngayThue;
             this.ngayDangKyTra = hopdong.ngayDangKyTra;
             this.khachHang = hopdong.khachHang;
         }
 
-        public THUEPHONG(string idHopDongTP, THANHTOANPHONG thanhtoan, NHANVIEN nv, string maPhong,
+        public THUEPHONG(string idHopDongTP, THANHTOANPHONG thanhtoan, NHANVIEN nv,  DANHMUCPHONG phong,
             string ngayThue, string ngayDangKyTra, KHACHHANG khachHang)
         {
             this.idHopDongTP = idHopDongTP;
             this.thanhtoan = thanhtoan;
             this.nv = nv;
-            this.maPhong = maPhong;
+            this.phong = phong;
             this.ngayThue = ngayThue;
             this.ngayDangKyTra = ngayDangKyTra;
             this.khachHang = khachHang;

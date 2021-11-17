@@ -13,22 +13,22 @@ namespace Library_Management
         public string dacDiem { get; set; }
     
         // 1 phong thuoc ve 1 loai phong
-        public LOAIPHONG idLoaiPhong { get; set; }
+        public LOAIPHONG loaiPhong { get; set; }
 
         public DANHMUCPHONG (DANHMUCPHONG dmp)
         {
             this.idPhong = dmp.idPhong;
             this.tinhTrang = dmp.tinhTrang;
             this.dacDiem = dmp.dacDiem;
-            this.idLoaiPhong = dmp.idLoaiPhong;
+            this.loaiPhong = dmp.loaiPhong;
         }
 
-        public DANHMUCPHONG (string idPhong, string tinhTrang, string dacDiem, LOAIPHONG idLoaiPhong)
+        public DANHMUCPHONG (string idPhong, string tinhTrang, string dacDiem, LOAIPHONG loaiPhong)
         {
             this.idPhong = idPhong;
             this.tinhTrang = tinhTrang;
             this.dacDiem = dacDiem;
-            this.idLoaiPhong = idLoaiPhong;
+            this.loaiPhong = loaiPhong;
         }
 
     }
