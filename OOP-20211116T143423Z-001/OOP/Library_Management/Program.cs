@@ -153,11 +153,17 @@ namespace Library_Management
 
         public static void TaoDSNhanVien()
         {
-            dsNhanVien.Add(new NHANVIEN("NV01", "Chan Hung", "01/01/2002", "Nam", "Thu Duc", "0818180226", "Tiep Tan", 200, "chanhung@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
-            dsNhanVien.Add(new NHANVIEN("NV02", "Nhat Anh", "02/01/2002", "Nam", "Thu Duc", "0818180225", "Tiep Tan", 210, "nhatanh@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
-            dsNhanVien.Add(new NHANVIEN("NV03", "Van Hien", "03/01/2002", "Nam", "Dak Lak", "0818180224", "Tiep Tan", 220, "vanhien@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
-            dsNhanVien.Add(new NHANVIEN("NV04", "Thanh Dien", "04/01/2002", "Nam", "Sa Dec", "0818180223", "Tiep Tan", 230, "thanhdien@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
-            dsNhanVien.Add(new NHANVIEN("NV05", "Chan Hung", "05/01/2002", "Nam", "HCM", "0818180222", "Tiep Tan", 240, "sieutran@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+            dsNhanVien.Add(new NHANVIEN("NV01", "Doan Chan Hung", "01/01/2002", "Nam", "Thu Duc", "0818180226", "Tiep Tan", 500, "chanhung@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+            dsNhanVien.Add(new NHANVIEN("NV02", "Vo Huynh Nhat Anh", "02/01/2002", "Nam", "Thu Duc", "0818180225", "Tiep Tan", 510, "nhatanh@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+            dsNhanVien.Add(new NHANVIEN("NV03", "Le Van Hien", "03/01/2002", "Nam", "Dak Lak", "0818180224", "Tiep Tan", 520, "vanhien@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+            dsNhanVien.Add(new NHANVIEN("NV04", "Nguyen Thanh Dien", "04/01/2002", "Nam", "Sa Dec", "0818180223", "Tiep Tan", 530, "thanhdien@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+            dsNhanVien.Add(new NHANVIEN("NV05", "Tran Quoc Sieu", "05/01/2002", "Nam", "HCM", "0818180222", "Tiep Tan",540, "sieutran@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+
+            dsNhanVien.Add(new NHANVIEN("NV06", "Vo Phuong Tram", "06/01/2002", "Nu", "Binh Thuan", "0818180221", "Le Tan", 400, "tramphuong@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+            dsNhanVien.Add(new NHANVIEN("NV07", "Ha Qua Kieu Anh", "07/01/2002", "Nu", "Ninh Thuan", "0818180220", "Le Tan", 410, "kieuanh@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+            dsNhanVien.Add(new NHANVIEN("NV08", "Phong My Uyen", "08/01/2002", "Nu", "Nha Trang", "0818180219", "Phuc vu phong", 420, "myuyen@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+            dsNhanVien.Add(new NHANVIEN("NV09", "Nguyen Phuong Ngan", "09/01/2002", "Nu", "Da Lat", "0818180218", "Phuc vu phong", 430, "phuongngan@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
+            dsNhanVien.Add(new NHANVIEN("NV10", "Tran Mai Huyen", "10/01/2002", "Nu", "Thu Duc", "0818180217", "Ke toan", 440, "huyenmai@123", new List<BOOKING>(), new List<THUEPHONG>(), new List<THANHTOANPHONG>()));
 
         }
 
@@ -279,27 +285,17 @@ namespace Library_Management
 
         
 
-        public static void Linq01()
-        {
-            // lambda
-            foreach (var a in dsLoaiPhong)
-            {
-                Console.WriteLine("Loai phong: {0}", a.tenLoaiPhong);
-                foreach (var b in a.dsCacPhong)
-                {
-                    Console.WriteLine(b.idPhong);
-                }
-                Console.WriteLine();
-            }
-        }
 
-        //Kiet: Lay ra danh sach booking theo tung nhan vien
-        public static void Linq02()
+
+        //Lay ra danh sach booking theo tung nhan vien
+        public static void Linq01()
         {
             var bookingGroups =
                 from b in dsBooking
                 group b by b.nv.idNV into newBooking
                 select new { NhanVien = newBooking.Key, Bookings = newBooking };
+
+            Console.WriteLine("Truy van Linq01\n");
            
             foreach(var g in bookingGroups)
             {
@@ -310,42 +306,44 @@ namespace Library_Management
                 }
                 Console.WriteLine("\n");
             }
+            Console.WriteLine("---------------------------------------------------");
         }
 
-        //Kiet: Chon ra danh sach cac hop dong o khong qua 2 ngay
-        public static void Linq03()
+        //Chon ra danh sach cac hop dong o khong qua 2 ngay
+        public static void Linq02()
         {
             var hopDongs =
                 from h in dsThuePhong
                 where Convert.ToDateTime(h.ngayDangKyTra).Day - Convert.ToDateTime(h.ngayThue).Day <= 2
                 select h;
 
-            Console.WriteLine("\nNhung hop dong co thoi gian thue khong qua 2 ngay");
-            
+            Console.WriteLine("Truy van Linq02\n");
+
+            Console.WriteLine("Nhung hop dong co thoi gian thue khong qua 2 ngay");
+        
             foreach(var h in hopDongs)
             {
                 Console.WriteLine("- Hop Dong: {0} - Nhan Vien: {1} \nKhachHang: {5} - Ma Phong: {2} - Ngay thue {3} - Ngay Tra {4}",
-                    h.idHopDongTP, h.nv.idNV, h.phong.idPhong, h.ngayThue, h.ngayDangKyTra, h.khachHang.hoTen);            }
+                    h.idHopDongTP, h.nv.idNV, h.phong.idPhong, h.ngayThue, h.ngayDangKyTra, h.khachHang.hoTen);            
+            }
+            Console.WriteLine("---------------------------------------------------");
 
         }
 
         //In ra tong so tien duoc tips cua moi nhan vien
-        public static void Linq04()
+        public static void Linq03()
         {
-            var tipsHopDong =
-              from hoadon in dsThanhToan
-              from hopdong in dsThuePhong
-              where hoadon.hopdong.idHopDongTP == hopdong.idHopDongTP
-              select new { idNhanVien = hopdong.nv.idNV, idHopDongTP = hopdong.idHopDongTP, tienDichVu = hoadon.tienDichVu };
             var tipsNhanVien =
                  from nhanvien in dsNhanVien
-                 from hopdong in tipsHopDong
-                 where hopdong.idNhanVien == nhanvien.idNV
-                 select new { idNV = nhanvien.idNV, tienDichVu = hopdong.tienDichVu };
+                 from thanhtoan in dsThanhToan
+                 where thanhtoan.nv.idNV == nhanvien.idNV
+                 select new { idNV = nhanvien.idNV, tienDichVu = thanhtoan.tienDichVu };
            var groupingNhanVien =
                 from nv in tipsNhanVien
                 group nv by nv.idNV into newNV
                 select new { NhanVien = newNV.Key, TongTips = newNV.Sum(nv => nv.tienDichVu) };
+
+            Console.WriteLine("Truy van Linq03");
 
             Console.WriteLine("\nTong so tien duoc tips cua moi nhan vien");
 
@@ -354,16 +352,20 @@ namespace Library_Management
                 Console.WriteLine("Nhan Vien {0} - Tong tips: {1}", g.NhanVien, g.TongTips);
                 }
 
+            Console.WriteLine("---------------------------------------------------");
+
         }
 
         //Chon ra quoc gia booking nhieu nhat
-        public static void Linq05()
+        public static void Linq04()
         {
             var bookingsGroup =
                 from bk in dsBooking
                 from quoctich in bk.kh.dsQuocTich
                 group bk by quoctich.tenNuoc into newbk
                 select new { nuoc = newbk.Key, bookings = newbk };
+
+            Console.WriteLine("Truy van Linq04\n");
 
             foreach (var b in bookingsGroup)
             {
@@ -374,11 +376,13 @@ namespace Library_Management
                 }
                 Console.Write("\n");
             }
-                
+
+            Console.WriteLine("---------------------------------------------------");
+
         }
 
         //Sap xep danh sach  booking theo thu tu tu dang ky som nhat den tre nhat
-        public static void Linq06()
+        public static void Linq05()
         {
             var sortedBookingsByRegisterDay =
                 from b in dsBooking
@@ -389,6 +393,8 @@ namespace Library_Management
                 from b in dsBooking
                 orderby Convert.ToDateTime(b.ngayNhan)
                 select b;
+
+            Console.WriteLine("Truy van Linq05\n");
 
 
             Console.WriteLine("Sap xep danh sach Booking theo ngay dang ky: ");
@@ -402,11 +408,12 @@ namespace Library_Management
             {
                 Console.WriteLine("Booking ID: {0} - Ten Khach Hang: {1} - Ngay nhan: {2}", s.idBooking, s.kh.hoTen, s.ngayNhan);
             }
+            Console.WriteLine("---------------------------------------------------");
 
         }
 
         //Sap xep cac loai phong theo thu tu duoc dat it den duoc dat nhieu nhat
-        public static void Linq07()
+        public static void Linq06()
         {
             var groupedDsCacPhong =
                 from d in dsChiTietBooking
@@ -420,6 +427,8 @@ namespace Library_Management
                 orderby soluong.booking.Count
                 select g;
 
+            Console.WriteLine("Truy van Linq06\n");
+
             foreach(var s in sortedDSCacPhong)
             {
                 Console.WriteLine("Loai Phong: {0}", s.LoaiPhong.tenLoaiPhong);
@@ -428,11 +437,13 @@ namespace Library_Management
                     Console.WriteLine("So Luong Dat: {0} ", c.booking.Count);
                 }
             }
-               
+
+            Console.WriteLine("---------------------------------------------------");
+
         }
 
         //In ra danh sach nhung hop dong da thanh toan tien truoc ngay tra phong
-        public static void Linq08()
+        public static void Linq07()
         {
             var payedBeforeLeaveContracts =
                 from d in dsThanhToan
@@ -444,6 +455,9 @@ namespace Library_Management
                 where d.thanhtoan == null
                 select d;
 
+            Console.WriteLine("Truy van Linq07\n");
+
+
             Console.WriteLine("Danh sach nhung phong da thanh toan truoc ngay tra: ");
             foreach (var p in payedBeforeLeaveContracts)
                 Console.WriteLine("ID Hop Dong: {0} - Ma Phong: {1}  - Ngay tra phong: {2} - Ngay thanh toan: {3}", p.hopdong.idHopDongTP, p.hopdong.phong.idPhong, p.hopdong.ngayDangKyTra, p.ngayThanhToan);
@@ -452,10 +466,12 @@ namespace Library_Management
             Console.WriteLine("\nDanh sach nhung phong chua thanh toan: ");
             foreach (var n in notPayedBeforeLeaveContracts)
                 Console.WriteLine("ID Hop Dong: {0} - Ma Phong: {1} - Loai Phong: {2}  - Ngay Tra Phong: {3} - Ngay thanh toan: {4}", n.idHopDongTP, n.phong.idPhong, n.phong.loaiPhong.tenLoaiPhong, n.ngayDangKyTra, "Unknown");
-          
+
+            Console.WriteLine("---------------------------------------------------");
         }
 
-        public static void Linq09()
+        //In ra danh sach nhan vien va khach hang trong khach san
+        public static void Linq08()
         {
             var customersInfo =
                 from d in dsKH
@@ -468,13 +484,100 @@ namespace Library_Management
 
             var allCustomersAndEmpoyeesInfo = customersInfo.Concat(employeesInfo);
 
+            Console.WriteLine("Truy van Linq08\n");
+
             Console.WriteLine("Danh sach nhan vien va khach hang o khach san: ");
             foreach(var a in allCustomersAndEmpoyeesInfo)
             {
                 Console.WriteLine("Ho va ten: {0} \t Gioi tinh: {1}", a.Ten, a.GioiTinh);
             }
+
+            Console.WriteLine("---------------------------------------------------");
+
         }
-       
+
+        //In ra thong tin nhan vien nhom boi so lan booking
+        public static void Linq09()
+        {
+            var groupNVByBookingTimes =
+                 from n in dsNhanVien
+                 group n by n.dsBooking.Count into newNV
+                 select new { SoLan = newNV.Key, ChiTiet = newNV };
+
+            Console.WriteLine("Truy van Linq09\n");
+
+           foreach(var g in groupNVByBookingTimes)
+            {
+                Console.WriteLine("So lan: {0}", g.SoLan);
+                foreach (var i in g.ChiTiet)
+                {
+                    Console.WriteLine("MSNV: {0} \t Ten Nhan Vien {1}", i.idNV, i.hoTen);
+                    foreach (var b in  i.dsBooking)
+                    {
+                        Console.WriteLine("ID Booking: {0} - Ngay Booking: {1} - Ten khach hang: {2}", b.idBooking, b.ngayDangKy, b.kh.hoTen);
+                    }
+                    
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("---------------------------------------------------");
+        }
+
+
+        //In ra ten (khong bao gom ho) danh sach nv theo gioi tinh va theo que quan
+        public static void Linq10()
+        {
+            var groupNVByGender =
+            from d in dsNhanVien
+            group d by d.gioiTinh into newNV
+            select new { GioiTinh = newNV.Key, ChiTiet = newNV };
+
+            var groupNVByHomeTown =
+            from d in dsNhanVien
+            group d by d.queQuan into newNV
+            select new { QueQuan = newNV.Key, ChiTiet = newNV };
+
+
+            Console.WriteLine("Truy van Linq10\n");
+
+            Console.WriteLine("Danh sach nhan vien theo gioi tinh: ");
+
+            foreach(var g in groupNVByGender)
+            {
+                Console.WriteLine("Gioi tinh: {0}", g.GioiTinh);
+                foreach (var c in g.ChiTiet)
+                {
+                    Console.WriteLine("Ten: {0} ", c.hoTen.Split(' ').Reverse().First());
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("\nDanh sach nhan vien theo que quan: ");
+            foreach (var g in groupNVByHomeTown)
+            {
+                Console.WriteLine("Que quan: {0}", g.QueQuan);
+                foreach (var c in g.ChiTiet)
+                {
+                    Console.WriteLine("Ten: {0} ", c.hoTen.Split(' ').Reverse().First());
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("---------------------------------------------------");
+        }
+
+        public static void Linq11()
+        {
+            // lambda
+            foreach (var a in dsLoaiPhong)
+            {
+                Console.WriteLine("Loai phong: {0}", a.tenLoaiPhong);
+                foreach (var b in a.dsCacPhong)
+                {
+                    Console.WriteLine(b.idPhong);
+                }
+                Console.WriteLine();
+            }
+        }
+
 
         static void Main(string[] args)
         {
@@ -493,20 +596,22 @@ namespace Library_Management
             TaoDSSuDung();
             TaoDSChiTietBooking();
 
+            //Kiet
+            Linq01();    
+            Linq02();   
+            Linq03();    
+            Linq04();   
+            Linq05();    
+            Linq06();    
+            Linq07();    
+            Linq08();   
+            Linq09();    
+            Linq10();
 
 
 
-
-
-            //Linq02();    //Kiet
-            //Linq03();    //Kiet 
-            //Linq04();    //Kiet
-            //Linq05();    //Kiet
-            //Linq06();    //Kiet
-            //Linq07();    //Kiet
-            //Linq08();    //Kiet
-            //Linq09();    //Kiet
-
+            //Phong
+            //Linq11();   
 
 
             Console.ReadKey();

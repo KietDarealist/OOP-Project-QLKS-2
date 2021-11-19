@@ -8,14 +8,14 @@ namespace Library_Management
 {
     class NHANVIEN
     {
-       // NHANVIEN(idNV, HoTen , NgaySinh, GioiTinh, DiaChi,
+       // NHANVIEN(idNV, HoTen , NgaySinh, GioiTinh, queQuan,
        //         SoDienThoai , ChucVu, Luong, MatKhau)
 
         public string idNV { get; set; }
         public string hoTen { get; set; }
         public string ngaySinh { get; set; }
         public string gioiTinh { get; set; }
-        public string diaChi { get; set; }
+        public string queQuan { get; set; }
         public string sdt { get; set; }
         public string chucVu { get; set; }
         public int luong { get; set; }
@@ -34,7 +34,7 @@ namespace Library_Management
             this.hoTen = nv.hoTen;
             this.ngaySinh = nv.ngaySinh;
             this.gioiTinh = nv.gioiTinh;
-            this.diaChi = nv.diaChi;
+            this.queQuan = nv.queQuan;
             this.sdt = nv.sdt;
             this.chucVu = nv.chucVu;
             this.luong = nv.luong;
@@ -46,7 +46,7 @@ namespace Library_Management
 
 
         public NHANVIEN(string idNV, string hoTen,
-        string ngaySinh, string gioiTinh, string diaChi,
+        string ngaySinh, string gioiTinh, string queQuan,
         string sdt, string chucVu, int luong, string matKhau,
         ICollection<BOOKING> dsBooking, ICollection<THUEPHONG> dsThuePhong,
         ICollection<THANHTOANPHONG> dsThanhToan)
@@ -55,7 +55,7 @@ namespace Library_Management
             this.hoTen = hoTen;
             this.ngaySinh = ngaySinh;
             this.gioiTinh = gioiTinh;
-            this.diaChi = diaChi;
+            this.queQuan = queQuan;
             this.sdt = sdt;
             this.chucVu = chucVu;
             this.luong = luong;
