@@ -10,7 +10,7 @@ namespace Library_Management
     {
         public LOAIPHONG lp { get; set; }
         public THIETBIDICHVU thietbi { get; set; }
-        int soluong { get; set; }
+        public int soluong { get; set; }
 
 
         public TRANGBI(TRANGBI tb)
